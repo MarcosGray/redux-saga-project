@@ -1,15 +1,31 @@
 import React, { Component } from 'react'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import reducers from './reducers/index'
+import createSagaMiddleware from 'redux-saga'
+import indexSaga from './sagas/index'
+import Info from './info'
+import UserAgent from './UserAgent'
 
-const store = createStore
+
+
+const sagaMiddleware = createSagaMiddleware()
+
+const store = createStore(
+  reducers,
+  applyMiddleware(sagaMiddleware)
+)
+
+sagaMiddleware.run(indexSaga)
 
 class App extends Component {
   render() {
     return (
-      <Provider strore={store}>
+      <Provider store={store}>
         <div className="App">
-          <p>Deu certo!</p>
+          <p>Consumindo uma API com Redux Saga</p>
+          <Info />
+          <UserAgent />
         </div>
       </Provider>
     );
