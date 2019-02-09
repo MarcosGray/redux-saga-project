@@ -1,9 +1,8 @@
-import { put } from 'redux-saga/effects'
-import axios from 'axios'
+import { put, call } from 'redux-saga/effects'
 import { loadDataUASuccess } from './../actions'
 
-function *getUA(){
-    const dados = yield axios.get('http://httpbin.org/user-agent')
+function *getUA(axios){
+    const dados = yield call(axios.get, 'http://httpbin.org/user-agent')
     yield put(loadDataUASuccess(dados.data['user-agent']))
   }
 

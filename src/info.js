@@ -3,8 +3,7 @@ import { loadDataRequest } from './actions'
 import { connect } from 'react-redux';
 
 class Info extends Component {
-    render(){
-        console.log(this.props)
+    render(){        
         return (
             <p>
                 IP: {this.props.data} <button onClick={() => this.props.loadData()} >Load</button> 
